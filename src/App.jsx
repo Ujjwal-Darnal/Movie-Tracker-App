@@ -1,5 +1,6 @@
 import "./styles/App.css";
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
+import StatsCard from "./components/StatsCard";
 function App() {
   return (
     <div className="app">

@@ -6,3 +6,4 @@ function StatsCard({title,value}){
     </div>
     )
 }
+export default StatsCard;
