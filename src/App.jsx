@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import StatsCard from "./components/StatsCard";
@@ -9,28 +9,34 @@ import MovieList from "./components/MovieList";
 
 
 function App() {
-  const [movies,setMovies] =  useState([
+  const [movies, setMovies] = useState([
     {
-      id:1,
-      title:"Interstellar",
-      status:"Watched",
-      rating:9,
+      id: 1,
+      title: "Interstellar",
+      status: "Watched",
+      rating: 9,
     }
   ]);
 
-// function to handle movie 
+  // function to handle movie 
 
-function handleAddMovie(movieTitle){
-  const newMovie = {
-    id:Date.now(),
-    title:movieTitle,
-    genre:"Action",
-    status:"Watchlist",
-    rating:0
+  function handleAddMovie(movieTitle) {
+    const newMovie = {
+      id: Date.now(),
+      title: movieTitle,
+      genre: "Action",
+      status: "Watchlist",
+      rating: 0
+    }
+    setMovies([...movies, newMovie
+    ]);
   }
-  setMovies([...movies,newMovie
-  ]);
-}
+  const totalMovies = movies.length;
+
+  const watchedMovies = movies.filter((movie) => movie.status === "Watched").length;
+
+  const watchlistMovies = movies.filter((movie) => movie.status === "Watchlist").length;
+
   return (
     <div className="app">
       <Navbar />
@@ -42,13 +48,13 @@ function handleAddMovie(movieTitle){
         </section>
 
         <section className="stats-grid">
-          <StatsCard title="Total Movies" value={movies.length} />
-          <StatsCard title="Watched" value={movies.length} />
-          <StatsCard title="Watchlist" value={movies.length} />
-          <StatsCard title="Favourites" value={movies.length} />
+          <StatsCard title="Total Movies" value={totalMovies} />
+          <StatsCard title="Watched" value={watchedMovies} />
+          <StatsCard title="Watchlist" value={watchlistMovies} />
+          <StatsCard title="Favourites" value={0} />
         </section>
 
-<MovieForm onAddMovie = {handleAddMovie}/>
+        <MovieForm onAddMovie={handleAddMovie} />
 
         <section className="movie-panel">
           <div className="panel-header">
@@ -57,10 +63,10 @@ function handleAddMovie(movieTitle){
               placeholder="Search Movies..." />
           </div>
 
-         <MovieList movies = {movies}/>
+          <MovieList movies={movies} />
         </section>
       </main>
-      
+
 
     </div>
   )
