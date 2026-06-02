@@ -1,7 +1,36 @@
+import {useState} from "react";
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import StatsCard from "./components/StatsCard";
+import MovieForm from "./components/MovieForm";
+import MovieList from "./components/MovieList";
+
+
+
+
 function App() {
+  const [movies,setMovies] =  useState([
+    {
+      id:1,
+      title:"Interstellar",
+      status:"Watched",
+      rating:9,
+    }
+  ]);
+
+// function to handle movie 
+
+function handleAddMovie(movieTitle){
+  const newMovie = {
+    id:Date.now(),
+    title:movieTitle,
+    genre:"Action",
+    status:"Watchlist",
+    rating:0
+  }
+  setMovies([...movies,newMovie
+  ]);
+}
   return (
     <div className="app">
       <Navbar />
@@ -13,11 +42,13 @@ function App() {
         </section>
 
         <section className="stats-grid">
-          <StatsCard title="Total Movies" value={0} />
-          <StatsCard title="Watched" value={0} />
-          <StatsCard title="Watchlist" value={0} />
-          <StatsCard title="Favourites" value={0} />
+          <StatsCard title="Total Movies" value={movies.length} />
+          <StatsCard title="Watched" value={movies.length} />
+          <StatsCard title="Watchlist" value={movies.length} />
+          <StatsCard title="Favourites" value={movies.length} />
         </section>
+
+<MovieForm onAddMovie = {handleAddMovie}/>
 
         <section className="movie-panel">
           <div className="panel-header">
@@ -26,12 +57,10 @@ function App() {
               placeholder="Search Movies..." />
           </div>
 
-          <div className="empty-state">
-            <h3>No movies added yet</h3>
-            <p>Start by adding your first movie to the tracker.</p>
-          </div>
+         <MovieList movies = {movies}/>
         </section>
       </main>
+      
 
     </div>
   )
