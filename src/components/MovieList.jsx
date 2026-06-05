@@ -1,7 +1,7 @@
 import MovieCard  from "./MovieCard";
 
 
-function MovieList({movies}){
+function MovieList({movies,onToggleStatus}){
    if(movies.length === 0){
     return(
         <div className="empty-state">
@@ -15,7 +15,9 @@ function MovieList({movies}){
     return (
         <div className="movie-list">
             {movies.map((movie)=>(
-               <MovieCard key = {movie.id} movie = {movie}/>
+               <MovieCard key = {movie.id}
+                movie = {movie}
+                onToggleStatus = {onToggleStatus}/>
             ))}
         </div>
     );

@@ -34,6 +34,21 @@ function App() {
     setMovies([...movies, newMovie
     ]);
   }
+
+function handleToggleStatus(movieId){
+  const updatedMovies = movies.map((movie)=>{
+    if(movie.id === movieId){
+      return{
+        ...movie,
+        status:movie.status === "Watched"?"Watchlist":"Watched",
+      };
+    }
+    return movie;
+  })
+  setMovies(updatedMovies);
+}
+
+
   const totalMovies = movies.length;
 
   const watchedMovies = movies.filter((movie) => movie.status === "Watched").length;
@@ -71,7 +86,8 @@ function App() {
               onChange = {(e)=>setSearchTerm(e.target.value)} />
           </div>
 
-          <MovieList movies={filteredMovies} />
+          <MovieList movies={filteredMovies}
+          onToggleStatus = {handleToggleStatus} />
         </section>
       </main>
 
