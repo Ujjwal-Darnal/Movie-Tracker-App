@@ -18,6 +18,9 @@ function App() {
     }
   ]);
 
+  const [searchTerm, setSearchTerm]= useState("");
+
+
   // function to handle movie 
 
   function handleAddMovie(movieTitle) {
@@ -36,6 +39,9 @@ function App() {
   const watchedMovies = movies.filter((movie) => movie.status === "Watched").length;
 
   const watchlistMovies = movies.filter((movie) => movie.status === "Watchlist").length;
+
+  const filteredMovies = movies.filter((movie)=> movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
 
   return (
     <div className="app">
@@ -60,10 +66,12 @@ function App() {
           <div className="panel-header">
             <h2>My Movies</h2>
             <input type="text"
-              placeholder="Search Movies..." />
+              placeholder="Search Movies..."
+              value={searchTerm}
+              onChange = {(e)=>setSearchTerm(e.target.value)} />
           </div>
 
-          <MovieList movies={movies} />
+          <MovieList movies={filteredMovies} />
         </section>
       </main>
 
