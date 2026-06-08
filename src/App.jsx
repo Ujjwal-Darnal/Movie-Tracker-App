@@ -47,7 +47,12 @@ function handleToggleStatus(movieId){
   })
   setMovies(updatedMovies);
 }
+// ===== function to delete movie ===== 
+function handleDeleteMovie(movieId){
+  const updatedMovies = movies.filter((movie)=>movie.id!== movieId);
 
+  setMovies(updatedMovies);
+}
 
   const totalMovies = movies.length;
 
@@ -87,7 +92,8 @@ function handleToggleStatus(movieId){
           </div>
 
           <MovieList movies={filteredMovies}
-          onToggleStatus = {handleToggleStatus} />
+          onToggleStatus = {handleToggleStatus} 
+          onDeleteMovie = {handleDeleteMovie}/>
         </section>
       </main>
 
