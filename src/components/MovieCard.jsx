@@ -6,16 +6,23 @@ function MovieCard({
   onUpdateRating,
 }) {
   return (
-    <div>
+  <div className="movie-card">
+    <div className="movie-info">
       <h3>{movie.title}</h3>
 
       <p>Genre: {movie.genre}</p>
       <p>Status: {movie.status}</p>
       <p>Rating: {movie.rating}/10</p>
 
+      {movie.isFavourite && <span>⭐ Favourite</span>}
+    </div>
+
+    <div className="movie-actions">
       <select
         value={movie.rating}
-        onChange={(e) => onUpdateRating(movie.id, e.target.value)}
+        onChange={(e) =>
+          onUpdateRating(movie.id, e.target.value)
+        }
       >
         <option value="0">Rate</option>
         <option value="1">1</option>
@@ -31,18 +38,23 @@ function MovieCard({
       </select>
 
       <button onClick={() => onToggleStatus(movie.id)}>
-        Mark as {movie.status === "Watched" ? "Watchlist" : "Watched"}
+        {movie.status === "Watched"
+          ? "Move to Watchlist"
+          : "Mark as Watched"}
       </button>
 
       <button onClick={() => onToggleFavourite(movie.id)}>
-        {movie.isFavourite ? "Remove Favourite" : "Add Favourite"}
+        {movie.isFavourite
+          ? "Remove Favourite"
+          : "Add Favourite"}
       </button>
 
       <button onClick={() => onDeleteMovie(movie.id)}>
         Delete
       </button>
     </div>
-  );
+  </div>
+);
 }
 
 export default MovieCard;
