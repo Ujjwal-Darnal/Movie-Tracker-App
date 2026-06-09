@@ -9,6 +9,7 @@ import MovieList from "./components/MovieList";
 
 
 function App() {
+
   const [movies,setMovies]=useState(()=>{
     const savedMovies = localStorage.getItem("movies");
 
@@ -28,6 +29,8 @@ function App() {
   });
 
   const [searchTerm, setSearchTerm]= useState("");
+
+  const [selectedFilter,setSelectedFilter] = useState("All");
 
 
   // function to handle movie 
@@ -96,7 +99,15 @@ function handleUpdateRating(movieId,newRating){
 
   const watchlistMovies = movies.filter((movie) => movie.status === "Watchlist").length;
 
-  const filteredMovies = movies.filter((movie)=> movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredMovies = movies.filter((movie)=>{
+    const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesFilter = selectedFilter === "ALL" || 
+    movie.status === selectedFilter || 
+    (selectedFilter === "Favourites" && movie.isFavourite);
+
+    return matchesSearch
+&& matchesFilter  })
 
   const favouriteMovies = movies.filter((movie)=>movie.isFavourite===true).length
 
@@ -130,6 +141,13 @@ function handleUpdateRating(movieId,newRating){
               placeholder="Search Movies..."
               value={searchTerm}
               onChange = {(e)=>setSearchTerm(e.target.value)} />
+          </div>
+
+          <div className="filter-buttons">
+            <button onClick={()=>setSelectedFilter("ALL")}>All</button>
+            <button onClick={()=>setSelectedFilter("Watched")}>Watched</button>
+            <button onClick={()=>setSelectedFilter("Watchlist")}>Watchlist</button>
+            <button onClick={()=>setSelectedFilter("Favourites")}>Favourites</button>
           </div>
 
           <MovieList movies={filteredMovies}
