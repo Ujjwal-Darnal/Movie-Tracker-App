@@ -144,11 +144,16 @@ function handleUpdateRating(movieId,newRating){
           </div>
 
           <div className="filter-buttons">
-            <button onClick={()=>setSelectedFilter("ALL")}>All</button>
-            <button onClick={()=>setSelectedFilter("Watched")}>Watched</button>
-            <button onClick={()=>setSelectedFilter("Watchlist")}>Watchlist</button>
-            <button onClick={()=>setSelectedFilter("Favourites")}>Favourites</button>
-          </div>
+  {["All", "Watched", "Watchlist", "Favourites"].map((filter) => (
+    <button
+      key={filter}
+      className={selectedFilter === filter ? "active-filter" : ""}
+      onClick={() => setSelectedFilter(filter)}
+    >
+      {filter}
+    </button>
+  ))}
+</div>
 
           <MovieList movies={filteredMovies}
           searchTerm={searchTerm}
