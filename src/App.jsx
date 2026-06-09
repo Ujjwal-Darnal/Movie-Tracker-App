@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import StatsCard from "./components/StatsCard";
@@ -9,15 +9,23 @@ import MovieList from "./components/MovieList";
 
 
 function App() {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
+  const [movies,setMovies]=useState(()=>{
+    const savedMovies = localStorage.getItem("movies");
+
+    if(savedMovies){
+      return JSON.parse(savedMovies)
+    }
+    return[
+      {
+          id: 1,
       title: "Interstellar",
+      genre: "Sci-Fi",
       status: "Watched",
       rating: 9,
-      isFavourite:false,
-    }
-  ]);
+      isFavourite: false,
+      },
+    ];
+  });
 
   const [searchTerm, setSearchTerm]= useState("");
 
@@ -91,6 +99,10 @@ function handleUpdateRating(movieId,newRating){
   const filteredMovies = movies.filter((movie)=> movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const favouriteMovies = movies.filter((movie)=>movie.isFavourite===true).length
+
+  useEffect(()=>{
+    localStorage.setItem("movies",JSON.stringify(movies));
+  },[movies]);
 
   return (
     <div className="app">
