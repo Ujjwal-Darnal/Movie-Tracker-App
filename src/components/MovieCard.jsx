@@ -1,4 +1,8 @@
-function MovieCard({movie,onToggleStatus,onDeleteMovie}){
+function MovieCard({movie,
+
+    onToggleStatus,
+    onDeleteMovie,
+onToggleFavourite}){
     return(
        <div>
         <h3>{movie.title}</h3>
@@ -10,7 +14,12 @@ function MovieCard({movie,onToggleStatus,onDeleteMovie}){
         </button>
 
         <button onClick={()=>onDeleteMovie(movie.id)}>Delete</button>
+
+          <button onClick = {()=>onToggleFavourite(movie.id)}>{movie.isFavourite?"Remove Favourite":"Add Favourite"}</button>
        </div>
     );
+    
+
+     
 }
 export default MovieCard;

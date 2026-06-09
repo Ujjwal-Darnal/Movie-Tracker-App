@@ -1,7 +1,11 @@
 import MovieCard  from "./MovieCard";
 
 
-function MovieList({movies,onToggleStatus,onDeleteMovie}){
+function MovieList({movies,onToggleStatus,
+    onDeleteMovie,
+    onToggleFavourite,
+
+}){
    if(movies.length === 0){
     return(
         <div className="empty-state">
@@ -18,7 +22,8 @@ function MovieList({movies,onToggleStatus,onDeleteMovie}){
                <MovieCard key = {movie.id}
                 movie = {movie}
                 onToggleStatus = {onToggleStatus}
-                onDeleteMovie={onDeleteMovie}/>
+                onDeleteMovie={onDeleteMovie}
+                onToggleFavourite = {onToggleFavourite}/>
             ))}
         </div>
     );

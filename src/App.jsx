@@ -15,6 +15,7 @@ function App() {
       title: "Interstellar",
       status: "Watched",
       rating: 9,
+      isFavourite:false,
     }
   ]);
 
@@ -29,7 +30,8 @@ function App() {
       title: movieTitle,
       genre: "Action",
       status: "Watchlist",
-      rating: 0
+      rating: 0,
+      isFavourite:false,
     }
     setMovies([...movies, newMovie
     ]);
@@ -54,6 +56,19 @@ function handleDeleteMovie(movieId){
   setMovies(updatedMovies);
 }
 
+// ========== function to handle favourtie movies ===== ??
+function handleToggleFavourite(movieId){
+const updatedMovies = movies.map((movie)=>{
+  if(movie.id=== movieId){
+    return{
+      ...movie,isFavourite:!movie.isFavourite,
+    }
+  }
+  return movie;
+});
+setMovies(updatedMovies);
+}
+
   const totalMovies = movies.length;
 
   const watchedMovies = movies.filter((movie) => movie.status === "Watched").length;
@@ -62,6 +77,7 @@ function handleDeleteMovie(movieId){
 
   const filteredMovies = movies.filter((movie)=> movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
+  const favouriteMovies = movies.filter((movie)=>movie.isFavourite===true).length
 
   return (
     <div className="app">
@@ -77,7 +93,7 @@ function handleDeleteMovie(movieId){
           <StatsCard title="Total Movies" value={totalMovies} />
           <StatsCard title="Watched" value={watchedMovies} />
           <StatsCard title="Watchlist" value={watchlistMovies} />
-          <StatsCard title="Favourites" value={0} />
+          <StatsCard title="Favourites" value={favouriteMovies} />
         </section>
 
         <MovieForm onAddMovie={handleAddMovie} />
@@ -93,7 +109,8 @@ function handleDeleteMovie(movieId){
 
           <MovieList movies={filteredMovies}
           onToggleStatus = {handleToggleStatus} 
-          onDeleteMovie = {handleDeleteMovie}/>
+          onDeleteMovie = {handleDeleteMovie}
+          onToggleFavourite={handleToggleFavourite}/>
         </section>
       </main>
 
