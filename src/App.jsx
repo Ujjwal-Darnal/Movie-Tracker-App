@@ -93,6 +93,25 @@ function handleUpdateRating(movieId,newRating){
   })
   setMovies(updatedMovies);
 }
+
+// ==== function to edit movies ===== //
+function handleEditMovie(movieId,updatedData){
+  const updatedMovies = movies.map((movie)=>{
+    if(movie.id === movieId){
+      return{
+        ...movie,
+        title:updatedData.title,
+        genre:updatedData.genre,
+      };
+    }
+    return movie;
+  })
+  setMovies(updatedMovies);
+}
+
+
+
+
   const totalMovies = movies.length;
 
   const watchedMovies = movies.filter((movie) => movie.status === "Watched").length;
@@ -102,7 +121,7 @@ function handleUpdateRating(movieId,newRating){
   const filteredMovies = movies.filter((movie)=>{
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesFilter = selectedFilter === "ALL" || 
+    const matchesFilter = selectedFilter === "All" || 
     movie.status === selectedFilter || 
     (selectedFilter === "Favourites" && movie.isFavourite);
 
@@ -161,6 +180,7 @@ function handleUpdateRating(movieId,newRating){
           onDeleteMovie = {handleDeleteMovie}
           onToggleFavourite={handleToggleFavourite}
           onUpdateRating = {handleUpdateRating}
+          onEditMovie = {handleEditMovie}
           />
         </section>
       </main>

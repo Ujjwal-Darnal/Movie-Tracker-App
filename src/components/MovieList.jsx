@@ -7,6 +7,7 @@ function MovieList({movies,
     onDeleteMovie,
     onToggleFavourite,
     onUpdateRating,
+    onEditMovie,
 
 
 }){
@@ -31,7 +32,8 @@ function MovieList({movies,
                 onToggleStatus = {onToggleStatus}
                 onDeleteMovie={onDeleteMovie}
                 onToggleFavourite = {onToggleFavourite}
-                onUpdateRating = {onUpdateRating}/>
+                onUpdateRating = {onUpdateRating}
+                onEditMovie = {onEditMovie}/>
             ))}
         </div>
     );
