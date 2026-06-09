@@ -8,6 +8,8 @@ function MovieCard({
   return (
     <div>
       <h3>{movie.title}</h3>
+
+      <p>Genre: {movie.genre}</p>
       <p>Status: {movie.status}</p>
       <p>Rating: {movie.rating}/10</p>
 

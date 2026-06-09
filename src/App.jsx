@@ -32,14 +32,14 @@ function App() {
 
   // function to handle movie 
 
-  function handleAddMovie(movieTitle) {
+  function handleAddMovie(movieData) {
     const newMovie = {
       id: Date.now(),
-      title: movieTitle,
-      genre: "Action",
-      status: "Watchlist",
-      rating: 0,
-      isFavourite:false,
+     title: movieData.title,
+genre: movieData.genre,
+status: movieData.status,
+rating: movieData.rating,
+isFavourite: false,
     }
     setMovies([...movies, newMovie
     ]);
