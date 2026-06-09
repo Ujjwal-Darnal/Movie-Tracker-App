@@ -133,10 +133,12 @@ function handleUpdateRating(movieId,newRating){
           </div>
 
           <MovieList movies={filteredMovies}
+          searchTerm={searchTerm}
           onToggleStatus = {handleToggleStatus} 
           onDeleteMovie = {handleDeleteMovie}
           onToggleFavourite={handleToggleFavourite}
-          onUpdateRating = {handleUpdateRating}/>
+          onUpdateRating = {handleUpdateRating}
+          />
         </section>
       </main>
 
