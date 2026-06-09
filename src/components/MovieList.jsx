@@ -4,6 +4,8 @@ import MovieCard  from "./MovieCard";
 function MovieList({movies,onToggleStatus,
     onDeleteMovie,
     onToggleFavourite,
+    onUpdateRating,
+
 
 }){
    if(movies.length === 0){
@@ -23,7 +25,8 @@ function MovieList({movies,onToggleStatus,
                 movie = {movie}
                 onToggleStatus = {onToggleStatus}
                 onDeleteMovie={onDeleteMovie}
-                onToggleFavourite = {onToggleFavourite}/>
+                onToggleFavourite = {onToggleFavourite}
+                onUpdateRating = {onUpdateRating}/>
             ))}
         </div>
     );

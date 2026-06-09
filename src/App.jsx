@@ -69,6 +69,19 @@ const updatedMovies = movies.map((movie)=>{
 setMovies(updatedMovies);
 }
 
+// ====== function to update rating ========== //
+function handleUpdateRating(movieId,newRating){
+  const updatedMovies = movies.map((movie)=>{
+    if(movie.id===movieId){
+      return{
+        ...movie,
+        rating:Number(newRating),
+      }
+    }
+    return movie;
+  })
+  setMovies(updatedMovies);
+}
   const totalMovies = movies.length;
 
   const watchedMovies = movies.filter((movie) => movie.status === "Watched").length;
@@ -110,7 +123,8 @@ setMovies(updatedMovies);
           <MovieList movies={filteredMovies}
           onToggleStatus = {handleToggleStatus} 
           onDeleteMovie = {handleDeleteMovie}
-          onToggleFavourite={handleToggleFavourite}/>
+          onToggleFavourite={handleToggleFavourite}
+          onUpdateRating = {handleUpdateRating}/>
         </section>
       </main>
 
