@@ -26,13 +26,14 @@ function MovieCard({
  return (
   <div className="movie-card">
 
-    {movie.posterUrl && (
-      <img
-        src={movie.posterUrl}
-        alt={movie.title}
-        className="movie-poster"
-      />
-    )}
+  <img
+  src={
+    movie.posterUrl ||
+    "https://placehold.co/120x180?text=No+Poster"
+  }
+  alt={movie.title}
+  className="movie-poster"
+/>
 
     {isEditing ? (
       <div className="movie-info">
