@@ -32,6 +32,7 @@ function App() {
 
   const [selectedFilter,setSelectedFilter] = useState("All");
 
+  const [sortBy,setSortBy]= useState("newest");
 
   // function to handle movie 
 
@@ -118,6 +119,7 @@ function handleEditMovie(movieId,updatedData){
 
   const watchlistMovies = movies.filter((movie) => movie.status === "Watchlist").length;
 
+  // ======= filtered movies =====//
   const filteredMovies = movies.filter((movie)=>{
     const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -127,6 +129,18 @@ function handleEditMovie(movieId,updatedData){
 
     return matchesSearch
 && matchesFilter  })
+
+//========= Sort Movies ========== //
+const sortedMovies = [...filteredMovies].sort((a,b)=>{
+  if(sortBy === "rating"){
+    return b.rating - a.rating;
+  }
+  if(sortBy === "title"){
+    return a.title.localeCompare(b.title);
+
+  }
+  return b.id - a.id;
+})
 
   const favouriteMovies = movies.filter((movie)=>movie.isFavourite===true).length
 
@@ -171,10 +185,25 @@ function handleEditMovie(movieId,updatedData){
     >
       {filter}
     </button>
+
+
   ))}
 </div>
 
-          <MovieList movies={filteredMovies}
+    <div className="sort-box">
+      <label>SortBy</label>
+<select 
+value={sortBy}
+onChange={(e)=>setSortBy(e.target.value)}
+>
+  <option value="newest">Newest first</option>
+    <option value="rating">Highest rating</option>
+    <option value="title">A-Z title</option>
+</select>
+    
+    </div>
+
+          <MovieList movies={sortedMovies}
           searchTerm={searchTerm}
           onToggleStatus = {handleToggleStatus} 
           onDeleteMovie = {handleDeleteMovie}
