@@ -303,3 +303,11 @@ select {
     padding: 1.25rem;
   }
 }
+
+/*  movie poster */
+.movie-poster {
+  width: 6rem;
+  height: 9rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}

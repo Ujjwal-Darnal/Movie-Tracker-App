@@ -34,7 +34,7 @@ function App() {
 
   const [sortBy,setSortBy]= useState("newest");
 
-  // function to handle movie 
+  // function to add movie 
 
   function handleAddMovie(movieData) {
     const newMovie = {
@@ -44,6 +44,7 @@ genre: movieData.genre,
 status: movieData.status,
 rating: movieData.rating,
 isFavourite: false,
+posterUrl:movieData.posterUrl,
     }
     setMovies([...movies, newMovie
     ]);

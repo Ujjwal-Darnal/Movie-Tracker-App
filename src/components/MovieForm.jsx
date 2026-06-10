@@ -5,6 +5,7 @@ function MovieForm({onAddMovie}){
         genre:"",
         status:"Watchlist",
         rating:0,
+        posteUrl:"", 
     });
  
     function handleSubmit(e) {
@@ -22,6 +23,7 @@ function MovieForm({onAddMovie}){
     genre: "",
     status: "Watchlist",
     rating: 0,
+    posteUrl:"",
   });
 }
 
@@ -48,11 +50,21 @@ function MovieForm({onAddMovie}){
 
 <input
   type="text"
+  name="posterUrl"
+  placeholder="Poster image URL"
+  value={formData.posterUrl}
+  onChange={handleChange}
+/>
+
+<input
+  type="text"
   name="genre"
   placeholder="Genre"
   value={formData.genre}
   onChange={handleChange}
 />
+
+
 
 <select
   name="status"
