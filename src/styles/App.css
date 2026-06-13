@@ -311,3 +311,10 @@ select {
   object-fit: cover;
   border-radius: 0.75rem;
 }
+
+/* ========= App.jsx loading search movies message ============== */
+.loading-message{
+  margin: 1rem 0;
+  color: #6b7280;
+  font-weight: 600;
+}

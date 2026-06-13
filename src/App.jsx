@@ -32,7 +32,7 @@ function App() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [sortBy, setSortBy] = useState("newest");
   const [apiMovies, setApiMovies] = useState([]);
-
+  const[isLoading,setIsLoading] = useState(false);
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
     const newMovie = {
@@ -192,6 +192,7 @@ function App() {
   // ===== TMDB search function =====
   async function searchMoviesFromApi(query) {
     if (!query.trim()) return;
+    setIsLoading(true);
 
     const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -202,6 +203,7 @@ function App() {
     const data = await response.json();
 
     setApiMovies(data.results);
+    setIsLoading(false);
   }
 
   return (
@@ -244,6 +246,11 @@ function App() {
               Search TMDB
             </button>
           </div>
+
+          {/* loading search movies message .. */}
+          {isLoading && (
+            <p className="loading-message">Searching movies....</p>
+          )}
 
           {/* ===== TMDB API search results ===== */}
           {apiMovies.length > 0 && (
