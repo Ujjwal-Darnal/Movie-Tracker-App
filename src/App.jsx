@@ -33,6 +33,7 @@ function App() {
   const [sortBy, setSortBy] = useState("newest");
   const [apiMovies, setApiMovies] = useState([]);
   const[isLoading,setIsLoading] = useState(false);
+  const[error,setError] = useState("");
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
     const newMovie = {
@@ -194,16 +195,27 @@ function App() {
     if (!query.trim()) return;
     setIsLoading(true);
 
-    const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+    setError("");
+
+    try{
+      const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`
     );
 
+if(!response.ok){
+  throw new Error("Failed to fetch movies");
+}
     const data = await response.json();
 
     setApiMovies(data.results);
-    setIsLoading(false);
+}
+catch (error){
+  setError("Something went wrong.Please try again.");
+} finally{
+  setIsLoading(false);
+}
   }
 
   return (
@@ -246,6 +258,9 @@ function App() {
               Search TMDB
             </button>
           </div>
+
+          {/* show error message  */}
+          <p className="error-message">{error}</p>
 
           {/* loading search movies message .. */}
           {isLoading && (
