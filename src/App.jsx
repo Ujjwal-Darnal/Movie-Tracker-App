@@ -34,6 +34,7 @@ function App() {
   const [apiMovies, setApiMovies] = useState([]);
   const[isLoading,setIsLoading] = useState(false);
   const[error,setError] = useState("");
+  const[hasSearched,setHasSearched] = useState(false);
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
     const newMovie = {
@@ -193,6 +194,8 @@ function App() {
   // ===== TMDB search function =====
   async function searchMoviesFromApi(query) {
     if (!query.trim()) return;
+    setHasSearched(true);
+
     setIsLoading(true);
 
     setError("");
@@ -266,6 +269,17 @@ catch (error){
           {isLoading && (
             <p className="loading-message">Searching movies....</p>
           )}
+
+        {/* empty state handling for api movies */}
+        {hasSearched &&
+  !isLoading &&
+  !error &&
+  apiMovies.length === 0 && (
+    <p className="empty-api-message">
+      No movies found.
+    </p>
+)}
+
 
           {/* ===== TMDB API search results ===== */}
           {apiMovies.length > 0 && (
