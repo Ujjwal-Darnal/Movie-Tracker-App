@@ -123,8 +123,15 @@ function App() {
 
   // ===== Function to add movie from TMDB API =====
   function handleAddApiMovie(movie) {
+   
+    const alreadyExists = movies.some((savedMovie) => savedMovie.tmdbId === movie.id);
+   if(alreadyExists){
+    alert("This movie is already in your tracker.")
+    return;
+   }
     const newMovie = {
       id: Date.now(),
+      tmdbId:movie.id,
       title: movie.title,
       genre: "Unknown",
       status: "Watchlist",
@@ -142,6 +149,7 @@ function App() {
     setSearchTerm("");
     setApiMovies([]);
     setSelectedFilter("All");
+    setHasSearched(false);
   }
 
   // ===== Stats calculations =====
@@ -263,7 +271,9 @@ catch (error){
           </div>
 
           {/* show error message  */}
-          <p className="error-message">{error}</p>
+          {error && (
+            <p className="error-message">{error}</p>
+          )}
 
           {/* loading search movies message .. */}
           {isLoading && (
