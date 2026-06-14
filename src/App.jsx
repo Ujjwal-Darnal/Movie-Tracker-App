@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import StatsCard from "./components/StatsCard";
 import MovieForm from "./components/MovieForm";
 import MovieList from "./components/MovieList";
+import TmdbMovieCard from "./components/TmdbMovieCard";
 
 function App() {
   // ===== Load movies from localStorage or use default movie =====
@@ -290,44 +291,13 @@ catch (error){
     </p>
 )}
 
-
-          {/* ===== TMDB API search results ===== */}
-          {apiMovies.length > 0 && (
-            <section className="api-results">
-              <h2>Search Results</h2>
-
-              <div className="api-movie-grid">
-                {apiMovies.map((movie) => (
-                  <div className="api-movie-card" key={movie.id}>
-                    <img
-                      src={
-                        movie.poster_path
-                          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                          : "https://placehold.co/120x180?text=No+Poster"
-                      }
-                      alt={movie.title}
-                    />
-
-                    <h3>{movie.title}</h3>
-
-                    <p>
-                      {movie.release_date
-                        ? movie.release_date.slice(0, 4)
-                        : "No year"}
-                    </p>
-
-                    <button
-                      type="button"
-                      onClick={() => handleAddApiMovie(movie)}
-                    >
-                      Add to Tracker
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
+{apiMovies.length > 0 && (
+  <TmdbResults
+    apiMovies={apiMovies}
+    onAddMovie={handleAddApiMovie}
+  />
+)}
+   
           <div className="filter-buttons">
             {["All", "Watched", "Watchlist", "Favourites"].map((filter) => (
               <button
