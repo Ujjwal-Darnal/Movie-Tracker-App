@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import StatsCard from "./components/StatsCard";
 import MovieForm from "./components/MovieForm";
 import MovieList from "./components/MovieList";
-import TmdbMovieCard from "./components/TmdbMovieCard";
 import TmdbResults from "./components/TmdbResults";
 
 function App() {
@@ -37,6 +36,7 @@ function App() {
   const[isLoading,setIsLoading] = useState(false);
   const[error,setError] = useState("");
   const[hasSearched,setHasSearched] = useState(false);
+  const[searchMode,setSearchMode] = useState("tracker");
 
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
@@ -172,9 +172,11 @@ function App() {
 
   // ===== Filter movies by search and selected filter =====
   const filteredMovies = movies.filter((movie) => {
-    const matchesSearch = movie.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+  
+    const matchesSearch =
+  searchMode === "tracker"
+    ? movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    : true;
 
     const matchesFilter =
       selectedFilter === "All" ||
@@ -203,18 +205,26 @@ function App() {
   }, [movies]);
 
   // ======= debounced tmdb search ======//
-  useEffect(()=>{
-    if(!searchTerm.trim()){
-      setApiMovies([]);
-      setHasSearched(false);
-      return;
-    }
-    const timer  = setTimeout(()=>{
-      searchMoviesFromApi(searchTerm);
-    },500);
+ useEffect(() => {
+  if (searchMode !== "tmdb") {
+    setApiMovies([]);
+    setHasSearched(false);
+    return;
+  }
 
-    return()=>clearTimeout(timer);
-  },[searchTerm])
+  if (!searchTerm.trim()) {
+    setApiMovies([]);
+    setHasSearched(false);
+    return;
+  }
+
+  const timer = setTimeout(() => {
+    searchMoviesFromApi(searchTerm);
+  }, 500);
+
+  return () => clearTimeout(timer);
+}, [searchTerm, searchMode]);
+
   // ===== TMDB search function =====
   async function searchMoviesFromApi(query) {
     if (!query.trim()) return;
@@ -268,18 +278,36 @@ catch (error){
         <MovieForm onAddMovie={handleAddMovie} />
 
         <section className="movie-panel">
-          <div className="panel-header">
-            <h2>My Movies</h2>
+       <div className="panel-header">
+  <h2>My Movies</h2>
 
-            <input
-              type="text"
-              placeholder="Search Movies..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+  <input
+    type="text"
+    placeholder={
+      searchMode === "tracker"
+        ? "Search your movies..."
+        : "Discover movies online..."
+    }
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
 
-          
-          </div>
+  <div className="search-mode-buttons">
+    <button
+      className={searchMode === "tracker" ? "active-mode" : ""}
+      onClick={() => setSearchMode("tracker")}
+    >
+      My Movies
+    </button>
+
+    <button
+      className={searchMode === "tmdb" ? "active-mode" : ""}
+      onClick={() => setSearchMode("tmdb")}
+    >
+      Discover
+    </button>
+  </div>
+</div>
 
           {/* show error message  */}
           {error && (

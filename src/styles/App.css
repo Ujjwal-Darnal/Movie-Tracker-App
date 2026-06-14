@@ -318,3 +318,21 @@ select {
   color: #6b7280;
   font-weight: 600;
 }
+
+/* ===== app.jsx panel heder seachmode class */
+.search-mode-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-mode-buttons button {
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.active-mode {
+  background-color: #111827;
+  color: white;
+}
