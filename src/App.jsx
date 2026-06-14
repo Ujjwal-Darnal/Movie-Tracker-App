@@ -202,6 +202,19 @@ function App() {
     localStorage.setItem("movies", JSON.stringify(movies));
   }, [movies]);
 
+  // ======= debounced tmdb search ======//
+  useEffect(()=>{
+    if(!searchTerm.trim()){
+      setApiMovies([]);
+      setHasSearched(false);
+      return;
+    }
+    const timer  = setTimeout(()=>{
+      searchMoviesFromApi(searchTerm);
+    },500);
+
+    return()=>clearTimeout(timer);
+  },[searchTerm])
   // ===== TMDB search function =====
   async function searchMoviesFromApi(query) {
     if (!query.trim()) return;
@@ -265,12 +278,7 @@ catch (error){
               onChange={(e) => setSearchTerm(e.target.value)}
             />
 
-            <button
-              type="button"
-              onClick={() => searchMoviesFromApi(searchTerm)}
-            >
-              Search TMDB
-            </button>
+          
           </div>
 
           {/* show error message  */}
