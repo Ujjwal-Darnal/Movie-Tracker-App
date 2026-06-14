@@ -36,6 +36,7 @@ function App() {
   const[isLoading,setIsLoading] = useState(false);
   const[error,setError] = useState("");
   const[hasSearched,setHasSearched] = useState(false);
+  
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
     const newMovie = {
@@ -294,6 +295,7 @@ catch (error){
 {apiMovies.length > 0 && (
   <TmdbResults
     apiMovies={apiMovies}
+    savedMovies = {movies}
     onAddMovie={handleAddApiMovie}
   />
 )}

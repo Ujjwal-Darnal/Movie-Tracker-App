@@ -22,9 +22,10 @@ function TmdbMovieCard({movie,onAddMovie}){
 
                     <button
                       type="button"
+                      disabled = {isAlreadyAdded}
                       onClick={() => handleAddApiMovie(movie)}
                     >
-                      Add to Tracker
+                     {isAlreadyAdded? "Added":"Add to Tracker"}
                     </button>
                   </div>
                 ))}
