@@ -5,6 +5,7 @@ import StatsCard from "./components/StatsCard";
 import MovieForm from "./components/MovieForm";
 import MovieList from "./components/MovieList";
 import TmdbMovieCard from "./components/TmdbMovieCard";
+import TmdbResults from "./components/TmdbResults";
 
 function App() {
   // ===== Load movies from localStorage or use default movie =====
@@ -36,7 +37,7 @@ function App() {
   const[isLoading,setIsLoading] = useState(false);
   const[error,setError] = useState("");
   const[hasSearched,setHasSearched] = useState(false);
-  
+
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
     const newMovie = {
