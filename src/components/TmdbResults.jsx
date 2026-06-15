@@ -1,6 +1,10 @@
 import TmdbMovieCard from "./TmdbMovieCard";
+import { useState } from "react";
 
 function TmdbResults({ apiMovies, savedMovies, onAddMovie }) {
+
+  const [selectedMovie,setSelectedMovie] = useState(null);
+
   return (
     <section className="api-results">
       <h2>Search Results</h2>
@@ -17,6 +21,7 @@ function TmdbResults({ apiMovies, savedMovies, onAddMovie }) {
               movie={movie}
               onAddMovie={onAddMovie}
               isAlreadyAdded={isAlreadyAdded}
+              onSelectMovie = {()=>setSelectedMovie(movie)}
             />
           );
         })}

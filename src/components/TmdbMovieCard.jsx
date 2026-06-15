@@ -1,6 +1,6 @@
-function TmdbMovieCard({ movie, onAddMovie, isAlreadyAdded }) {
+function TmdbMovieCard({ movie, onAddMovie, isAlreadyAdded,onSelectMovie }) {
   return (
-    <div className="api-movie-card">
+    <div className="api-movie-card" onClick={onSelectMovie}>
       <img
         src={
           movie.poster_path
@@ -21,7 +21,10 @@ function TmdbMovieCard({ movie, onAddMovie, isAlreadyAdded }) {
       <button
         type="button"
         disabled={isAlreadyAdded}
-        onClick={() => onAddMovie(movie)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onAddMovie(movie);
+        }}
       >
         {isAlreadyAdded ? "Added" : "Add to Tracker"}
       </button>
