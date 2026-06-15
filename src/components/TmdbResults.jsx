@@ -1,6 +1,6 @@
 import TmdbMovieCard from "./TmdbMovieCard";
 import { useState } from "react";
-
+import MovieModal from "./MovieModal";
 function TmdbResults({ apiMovies, savedMovies, onAddMovie }) {
 
   const [selectedMovie,setSelectedMovie] = useState(null);
@@ -26,6 +26,19 @@ function TmdbResults({ apiMovies, savedMovies, onAddMovie }) {
           );
         })}
       </div>
+      
+      {selectedMovie && (
+  <MovieModal
+    movie={selectedMovie}
+    onClose={() => setSelectedMovie(null)}
+    onAddMovie={onAddMovie}
+    isAlreadyAdded={savedMovies.some(
+      (savedMovie) =>
+        savedMovie.tmdbId === selectedMovie.id
+    )}
+  />
+)}
+      
     </section>
   );
 }
