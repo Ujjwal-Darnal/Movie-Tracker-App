@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import StatsCard from "./components/StatsCard";
@@ -38,6 +38,7 @@ function App() {
   const[hasSearched,setHasSearched] = useState(false);
   const[searchMode,setSearchMode] = useState("tracker");
 
+  const movieFormRef = useRef(null);
   // ===== Function to add movie manually =====
   function handleAddMovie(movieData) {
     const newMovie = {
@@ -155,6 +156,13 @@ function App() {
     setHasSearched(false);
   }
 
+  // ===== function to scroll movie button to movie form = //
+  function scrollToMovieForm() {
+  movieFormRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
   // ===== Stats calculations =====
   const totalMovies = movies.length;
 
@@ -257,7 +265,7 @@ catch (error){
 
   return (
     <div className="app">
-      <Navbar />
+      <Navbar onAddMovieClick={scrollToMovieForm} />
 
       <main className="dashboard">
         <section className="hero-section">
@@ -275,7 +283,9 @@ catch (error){
           <StatsCard title="Favourites" value={favouriteMovies} />
         </section>
 
-        <MovieForm onAddMovie={handleAddMovie} />
+       <div ref={movieFormRef}>
+  <MovieForm onAddMovie={handleAddMovie} />
+</div>
 
         <section className="movie-panel">
        <div className="panel-header">
