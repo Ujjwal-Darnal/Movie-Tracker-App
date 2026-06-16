@@ -1,7 +1,22 @@
+import { useEffect } from "react";
 function MovieModal({ movie, onClose, onAddMovie, isAlreadyAdded }) {
+
+  useEffect(()=>{
+    function handleKeyDown(event){
+      if(event.key === "Escape"){
+        onClose();
+      }
+    }
+    window.addEventListener("keydown",handleKeyDown);
+    return()=>{
+      window.removeEventListener("keydown",handleKeyDown);
+    };
+  },[onClose]);
+  
   return (
-    <div className="modal-overlay">
-      <div className="movie-modal">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="movie-modal"
+      onClick={(e)=>e.stopPropagation()}>
         <button
           type="button"
           className="modal-close"
