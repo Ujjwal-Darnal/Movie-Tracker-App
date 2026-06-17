@@ -18,6 +18,12 @@ function TmdbMovieCard({ movie, onAddMovie, isAlreadyAdded,onSelectMovie }) {
           : "No year"}
       </p>
 
+      <p>
+  ⭐ {movie.vote_average
+    ? movie.vote_average.toFixed(1)
+    : "N/A"}/10
+</p>
+
       <button
         type="button"
         disabled={isAlreadyAdded}
