@@ -23,92 +23,85 @@ function MovieCard({
     setIsEditing(false);
   }
 
- return (
-  <div className="movie-card">
+  return (
+    <article className="movie-card">
+      <img
+        src={movie.posterUrl || "https://placehold.co/300x450?text=No+Poster"}
+        alt={movie.title}
+        className="movie-poster"
+      />
 
-  <img
-  src={
-    movie.posterUrl ||
-    "https://placehold.co/120x180?text=No+Poster"
-  }
-  alt={movie.title}
-  className="movie-poster"
-/>
+      <div className="movie-card-content">
+        {isEditing ? (
+          <div className="movie-edit-form">
+            <input
+              type="text"
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+            />
 
-    {isEditing ? (
-      <div className="movie-info">
-        <input
-          type="text"
-          value={editTitle}
-          onChange={(e) => setEditTitle(e.target.value)}
-        />
+            <input
+              type="text"
+              value={editGenre}
+              onChange={(e) => setEditGenre(e.target.value)}
+            />
 
-        <input
-          type="text"
-          value={editGenre}
-          onChange={(e) => setEditGenre(e.target.value)}
-        />
+            <button type="button" onClick={handleSaveEdit}>
+              Save
+            </button>
 
-        <button onClick={handleSaveEdit}>
-          Save
-        </button>
+            <button type="button" onClick={() => setIsEditing(false)}>
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <>
+            <h3>{movie.title}</h3>
 
-        <button onClick={() => setIsEditing(false)}>
-          Cancel
-        </button>
+            <p className="movie-meta">
+              {movie.genre} • {movie.status}
+            </p>
+
+            <p className="movie-rating">⭐ {movie.rating}/10</p>
+
+            {movie.isFavourite && (
+              <span className="favourite-badge">Favourite</span>
+            )}
+          </>
+        )}
+
+        <div className="movie-actions">
+          <select
+            value={movie.rating}
+            onChange={(e) => onUpdateRating(movie.id, e.target.value)}
+          >
+            <option value="0">Rate</option>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+
+          <button type="button" onClick={() => onToggleStatus(movie.id)}>
+            {movie.status === "Watched" ? "Watchlist" : "Watched"}
+          </button>
+
+          <button type="button" onClick={() => onToggleFavourite(movie.id)}>
+            {movie.isFavourite ? "Unfavourite" : "Favourite"}
+          </button>
+
+          <button type="button" onClick={() => setIsEditing(true)}>
+            Edit
+          </button>
+
+          <button type="button" onClick={() => onDeleteMovie(movie.id)}>
+            Delete
+          </button>
+        </div>
       </div>
-    ) : (
-      <div className="movie-info">
-        <h3>{movie.title}</h3>
-
-        <p>Genre: {movie.genre}</p>
-
-        <p>Status: {movie.status}</p>
-
-        <p>Rating: {movie.rating}/10</p>
-
-        {movie.isFavourite && <span>⭐ Favourite</span>}
-      </div>
-    )}
-
-    <div className="movie-actions">
-      <select
-        value={movie.rating}
-        onChange={(e) =>
-          onUpdateRating(movie.id, e.target.value)
-        }
-      >
-        <option value="0">Rate</option>
-
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-          <option key={n} value={n}>
-            {n}
-          </option>
-        ))}
-      </select>
-
-      <button onClick={() => onToggleStatus(movie.id)}>
-        {movie.status === "Watched"
-          ? "Move to Watchlist"
-          : "Mark as Watched"}
-      </button>
-
-      <button onClick={() => onToggleFavourite(movie.id)}>
-        {movie.isFavourite
-          ? "Remove Favourite"
-          : "Add Favourite"}
-      </button>
-
-      <button onClick={() => setIsEditing(true)}>
-        Edit
-      </button>
-
-      <button onClick={() => onDeleteMovie(movie.id)}>
-        Delete
-      </button>
-    </div>
-  </div>
-);
+    </article>
+  );
 }
 
 export default MovieCard;

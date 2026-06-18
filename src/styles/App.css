@@ -44,7 +44,7 @@ select {
   align-items: center;
 }
 
-.navbar h2 {
+.navbar h1 {
   font-size: 1.4rem;
   margin-bottom: 0.25rem;
 }
@@ -213,51 +213,88 @@ select {
   border: 1px solid #d1d5db;
 }
 
-/* ===== Movie List & Cards ===== */
+/* ===== Saved Movie Grid & Cards ===== */
 .movie-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
   gap: 1rem;
 }
 
 .movie-card {
   background-color: white;
   border-radius: 1rem;
-  border: 1px solid #ddd;
-  padding: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1.25rem rgba(17, 24, 39, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-0.35rem);
+  box-shadow: 0 1rem 2rem rgba(17, 24, 39, 0.12);
 }
 
 .movie-poster {
-  width: 6rem;
-  height: 9rem;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  height: auto;
   object-fit: cover;
-  border-radius: 0.75rem;
 }
 
-.movie-info h3 {
+.movie-card-content {
+  padding: 0.75rem;
+}
+
+.movie-card-content h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.movie-meta {
+  color: #6b7280;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
 
-.movie-info p {
-  margin-bottom: 0.35rem;
-  color: #4b5563;
+.movie-rating {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.favourite-badge {
+  display: inline-block;
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
 }
 
 .movie-actions {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .movie-actions button,
 .movie-actions select {
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
+  width: 100%;
+  padding: 0.45rem;
+  font-size: 0.9rem;
+  border-radius: 0.65rem;
+  border: 1px solid #d1d5db;
   cursor: pointer;
+}
+
+.movie-edit-form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.movie-edit-form input {
+  padding: 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.65rem;
 }
 
 /* ===== TMDB Search Feedback ===== */
@@ -363,14 +400,11 @@ select {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 1rem;
   z-index: 1000;
-
   animation: fadeIn 0.2s ease;
 }
 
@@ -378,16 +412,12 @@ select {
   background-color: white;
   width: 100%;
   max-width: 50rem;
-
   border-radius: 1rem;
   padding: 1.5rem;
-
   display: grid;
   grid-template-columns: 18rem 1fr;
   gap: 1.5rem;
-
   position: relative;
-
   animation: scaleIn 0.2s ease;
 }
 
@@ -417,23 +447,17 @@ select {
   position: absolute;
   top: 1rem;
   right: 1rem;
-
   width: 2.5rem;
   height: 2.5rem;
-
   border: none;
   border-radius: 50%;
-
   background-color: #111827;
   color: white;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 1.2rem;
   font-weight: bold;
-
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -496,11 +520,6 @@ select {
 
   .search-mode-buttons button {
     flex: 1;
-  }
-
-  .movie-card {
-    flex-direction: column;
-    gap: 1rem;
   }
 
   .movie-actions {
