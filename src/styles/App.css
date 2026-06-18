@@ -285,18 +285,46 @@ select {
   border: 1px solid #d1d5db;
   cursor: pointer;
 }
-
+/* ===== Edit Movie Form ===== */
 .movie-edit-form {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .movie-edit-form input {
-  padding: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 0.65rem;
+  outline: none;
 }
 
+.movie-edit-form button {
+  width: 100%;
+  padding: 0.55rem;
+  border: none;
+  border-radius: 0.65rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.movie-edit-form button:first-of-type {
+  background-color: #111827;
+  color: white;
+}
+
+.movie-edit-form button:first-of-type:hover {
+  background-color: #1f2937;
+}
+
+.movie-edit-form button:last-of-type {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.movie-edit-form button:last-of-type:hover {
+  background-color: #d1d5db;
+}
 /* ===== TMDB Search Feedback ===== */
 .loading-message,
 .empty-api-message {
