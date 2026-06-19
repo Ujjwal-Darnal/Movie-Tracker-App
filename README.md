@@ -1,16 +1,179 @@
-# React + Vite
+# 🎬 Movie Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application built to manage, organize, and discover movies. Users can create personal watchlists, track watched movies, rate favourites, search collections, and discover new movies using the TMDB API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Features
 
-## React Compiler
+✅ Add movies manually
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+✅ Discover movies using TMDB API
 
-## Expanding the ESLint configuration
+✅ Add movies directly from TMDB search results
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Watchlist and Watched status tracking
+
+✅ Favourite movie system
+
+✅ Movie rating system (1–10)
+
+✅ Edit movie details
+
+✅ Delete movies
+
+✅ Search movies instantly
+
+✅ Filter movies
+
+✅ Sort movies
+
+✅ Responsive dashboard layout
+
+✅ Local Storage persistence
+
+---
+
+## 🛠️ Technologies Used
+
+- React
+- JavaScript (ES6+)
+- Vite
+- CSS3
+- TMDB API
+- Local Storage
+- Git & GitHub
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+
+![Dashboard](./screenshots/dashboard.png)
+
+### My Movies Collection
+
+![My Movies](./screenshots/my-movies.png)
+
+### Movie Cards & Tracking Features
+
+![Movie Cards](./screenshots/movie-cards.png)
+
+### Discover Movies with TMDB API
+
+![Discover Movies](./screenshots/discover.png)
+
+---
+
+## 🎯 Key Features
+
+### Movie Management
+
+- Add new movies
+- Edit movie information
+- Delete movies
+- Track watch status
+- Mark favourites
+- Rate movies from 1–10
+
+### Search & Filtering
+
+- Search movies instantly
+- Filter by:
+  - All Movies
+  - Watched
+  - Watchlist
+  - Favourites
+- Sort by newest or oldest
+
+### TMDB API Integration
+
+- Search real movies from TMDB
+- Display movie posters
+- Display release years
+- Display TMDB ratings
+- Add movies directly to personal tracker
+
+### Data Persistence
+
+- Movies are saved in Local Storage
+- Data remains available after refreshing the browser
+
+---
+
+## 📚 What I Learned
+
+This project helped me improve my understanding of:
+
+- React Components
+- Props
+- State Management
+- Event Handling
+- Conditional Rendering
+- Array Methods
+- API Integration
+- Local Storage
+- Responsive Design
+- UI/UX Design Principles
+
+---
+
+## 🏗️ Future Improvements
+
+- User Authentication
+- Dark Mode
+- Movie Details Page
+- Pagination
+- Trailer Integration
+- Backend Database
+- User Profiles
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Ujjwal-Darnal/Movie-Tracker-App.git
+```
+
+Navigate into the project:
+
+```bash
+cd Movie-Tracker-App
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## 👨‍💻 Author
+
+**Ujjwal Darnal**
+
+Computer Science Student | React Developer | Aspiring Full Stack Developer
+
+GitHub:
+https://github.com/Ujjwal-Darnal
+
+LinkedIn:
+https://www.linkedin.com/in/ujjwal-darnal-b23744331/?skipRedirect=true
+
+
+---
+
+## ⭐ Project Goal
+
+This project was built as part of my frontend development journey to practice building real-world React applications that combine CRUD operations, API integration, state management, and responsive UI design.
