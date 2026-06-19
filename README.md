@@ -1,3 +1,6 @@
+#Live demo Link
+https://movie-tracker-app-nu.vercel.app/
+
 # 🎬 Movie Tracker App
 
 A modern React application built to manage, organize, and discover movies. Users can create personal watchlists, track watched movies, rate favourites, search collections, and discover new movies using the TMDB API.
